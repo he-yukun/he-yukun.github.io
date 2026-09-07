@@ -11,6 +11,178 @@
   async
   src="https://gc.zgo.at/count.js">
 </script>
+
+ <style>
+  #music-toggle {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #757b83;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition:
+      color .25s ease,
+      filter .25s ease,
+      transform .2s ease;
+  }
+
+  #music-toggle svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  #music-toggle svg > path:first-child {
+    fill: currentColor;
+    stroke-width: 1.2;
+  }
+
+  #music-toggle:hover {
+    color: #3e6988;
+    transform: scale(1.08);
+  }
+
+  #music-toggle:active {
+    transform: scale(.96);
+  }
+
+  #music-toggle:focus-visible {
+    outline: 1px solid #3e6988;
+    outline-offset: 0;
+    border-radius: 4px;
+  }
+
+  #music-toggle[aria-pressed="true"] {
+    color: #3e6988;
+    filter: drop-shadow(0 0 5px rgb(62 105 136 / 18%));
+  }
+
+  #music-toggle .sound-wave,
+  #music-toggle .sound-off {
+    transition: opacity .25s ease;
+  }
+
+  #music-toggle .sound-wave { opacity: 0; }
+  #music-toggle .sound-off { opacity: 1; }
+
+  #music-toggle[aria-pressed="true"] .sound-wave {
+    opacity: 1;
+  }
+
+  #music-toggle[aria-pressed="true"] .sound-off {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #music-toggle,
+    #music-toggle .sound-wave,
+    #music-toggle .sound-off {
+      transition: none;
+    }
+
+    #music-toggle:hover,
+    #music-toggle:active {
+      transform: none;
+    }
+  }
+</style>
+
+ <audio
+  id="background-music"
+  src="music.m4a"
+  loop
+  muted
+  preload="none">
+</audio>
+
+<button
+  id="music-toggle"
+  type="button"
+  aria-label="Background music"
+  aria-pressed="false"
+  title="Play background music">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true">
+    <path d="M11 5 6 9H3v6h3l5 4Z" />
+    <path
+      class="sound-wave"
+      d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14" />
+    <path
+      class="sound-off"
+      d="m16 9 5 6m0-6-5 6" />
+  </svg>
+</button>
+
+<script>
+(() => {
+  const audio = document.getElementById("background-music");
+  const button = document.getElementById("music-toggle");
+  let request = 0;
+
+  function updateButton() {
+    const playing = !audio.paused && !audio.muted;
+    button.setAttribute("aria-pressed", String(playing));
+    button.title = playing
+      ? "Pause background music"
+      : "Play background music";
+  }
+
+  button.addEventListener("click", async () => {
+    const currentRequest = ++request;
+
+    if (!audio.paused) {
+      audio.pause();
+      audio.muted = true;
+      return;
+    }
+
+    if (audio.error) audio.load();
+    audio.muted = false;
+
+    try {
+      await audio.play();
+    } catch (error) {
+      if (currentRequest !== request || error.name === "AbortError") {
+        return;
+      }
+
+      audio.pause();
+      audio.muted = true;
+      updateButton();
+      button.title = "Unable to play music. Click to retry.";
+    }
+  });
+
+  ["play", "pause", "volumechange"].forEach(event => {
+    audio.addEventListener(event, updateButton);
+  });
+
+  audio.addEventListener("error", () => {
+    audio.pause();
+    audio.muted = true;
+    updateButton();
+    button.title = "Unable to play music. Click to retry.";
+  });
+
+  updateButton();
+})();
+</script>
  
  <body>
 <h2>      何煜坤 (He Yukun) </h2>
