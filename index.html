@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <script
-    data-goatcounter="https://heyukun.goatcounter.com/count"
-    async
-    src="https://gc.zgo.at/count.js">
-  </script>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>He Yukun's page</title>
-<style id="swiss-style">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>He Yukun's page</title>
+  <style id="swiss-style">
   :root {
-    /* SCMS heading navy and Fudan's standard blue (RGB 14, 65, 156). */
     --page: #f7f5ef;
     --ink: #252522;
     --muted: #494943;
     --heading: #2c507c;
     --accent: #0e419c;
-    --rule: #beb8ab;
+    --rule: #c8c1b4;
+    --section-rail: 112px;
+    --section-gap: 36px;
+    --list-indent: 32px;
+    --item-inset: 6px;
   }
 
   html {
@@ -30,266 +27,129 @@
 
   body {
     box-sizing: border-box;
-    display: grid;
-    grid-template-columns: 144px minmax(0, 1fr);
-    column-gap: 40px;
-    max-width: 1200px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 48px 64px 64px;
+    padding: 60px 56px 72px;
     font-size: 16px;
     line-height: 1.5;
   }
 
-  body > h2 {
+  .page-header {
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  h1 {
+    margin: 0 0 28px;
     color: var(--heading);
-    grid-column: 1 / -1;
-    margin: 0 0 26px;
-    font-size: clamp(28px, 3.2vw, 38px);
-    font-weight: 700;
+    font-size: clamp(30px, 3.2vw, 40px);
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: -.035em;
   }
+  .roman-name { white-space: nowrap; }
 
-  body > hr {
-    grid-column: 1 / -1;
-    width: 100%;
-    margin: 0;
-    border: 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  body > p:first-of-type {
-    grid-column: 1 / -1;
-    margin: 22px 0 28px;
-    color: var(--ink);
+  .profile-details {
     font-size: 1em;
     font-weight: 400;
     line-height: 1.65;
   }
+  .profile-details p { margin: 0; overflow-wrap: break-word; }
 
-  body > h3 {
+  .publication-section {
+    display: grid;
+    grid-template-columns: var(--section-rail) minmax(0, 1fr);
+    column-gap: var(--section-gap);
+    padding-top: 34px;
+  }
+  .publication-section + .publication-section {
+    margin-top: 36px;
+    border-top: 1px solid var(--rule);
+    padding-top: 30px;
+  }
+  .section-title {
+    margin: 3px 0 0;
     color: var(--heading);
-    grid-column: 1;
-    margin: 28px 0 0;
     font-size: 13px;
     font-weight: 600;
-    line-height: 24px;
-    letter-spacing: .065em;
+    line-height: 1.6;
+    letter-spacing: .07em;
     text-transform: uppercase;
   }
 
-  body > ol {
-    grid-column: 2;
-    margin: 28px 0 12px;
-    padding: 0 0 0 2.2rem;
+  .publications {
+    min-width: 0;
+    margin: 0;
+    padding-left: var(--list-indent);
   }
-
-  body > ol > li {
-    padding-left: .5rem;
-    margin: 0 0 18px;
+  .publications > li {
+    padding-left: var(--item-inset);
+    margin: 0 0 22px;
     overflow-wrap: break-word;
   }
-
-  body > ol > li::marker {
+  .publications > li:last-child { margin-bottom: 0; }
+  .publications > li::marker {
     color: var(--accent);
     font-size: 13px;
     font-weight: 500;
     font-variant-numeric: tabular-nums;
   }
-
-  .publication-title { font-weight: 500; }
-  .publication-details { color: var(--muted); font-size: 14px; }
+  .publication-title { font-weight: 400; }
+  .publication-title a { font-weight: 500; }
+  .publication-details {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.55;
+  }
   .publication-details b { font-weight: 600; }
 
-  body > p:last-of-type {
-    grid-column: 2;
-    margin: 8px 0 0;
-    padding-top: 20px;
+  .page-footer {
+    margin: 30px 0 0 calc(var(--section-rail) + var(--section-gap) + var(--list-indent) + var(--item-inset));
+    padding-top: 22px;
     border-top: 1px solid var(--rule);
     font-size: 1em;
   }
-  body > p:last-of-type > br { display: none; }
+  .page-footer p { margin: 0; }
+  .page-footer a { color: var(--heading); }
 
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-  a:hover { color: var(--accent); }
+  a { color: inherit; text-decoration: none; }
+  a:hover, .page-footer a:hover { color: var(--accent); }
   a:focus-visible {
     outline: 1px solid var(--accent);
     outline-offset: 4px;
   }
 
+  @media (min-width: 721px) and (max-width: 900px) {
+    :root { --section-rail: 100px; --section-gap: 28px; }
+    body { padding: 48px 48px 64px; }
+  }
+
   @media (max-width: 720px) {
-    body {
-      display: block;
-      padding: 32px 64px 48px 24px;
-      font-size: 15px;
-    }
-    body > h2 { margin-bottom: 22px; font-size: 29px; }
-    body > p:first-of-type { margin: 18px 0 24px; }
-    body > h3 { margin-top: 24px; }
-    body > ol { margin-top: 16px; padding-left: 1.8rem; }
-    body > ol > li { padding-left: .35rem; margin-bottom: 18px; }
-    .publication-details { font-size: 13px; }
-    body > p:last-of-type { margin-top: 24px; }
+    :root { --list-indent: 26px; }
+    body { padding: 32px 64px 48px 24px; font-size: 15px; }
+    h1 { margin-bottom: 22px; font-size: clamp(28px, 7.7vw, 32px); }
+    .page-header { padding-bottom: 28px; }
+    .publication-section { display: block; padding-top: 26px; }
+    .publication-section + .publication-section { margin-top: 28px; padding-top: 24px; }
+    .section-title { margin: 0 0 18px; }
+    .page-footer { margin: 28px 0 0; padding-top: 20px; }
   }
 
   @media print {
     html { background: white; }
-    body { display: block; max-width: none; padding: 0; font-size: 11pt; }
-    body > h2 { font-size: 24pt; }
-    body > ol > li { break-inside: avoid; }
+    body { max-width: none; padding: 0; font-size: 11pt; }
+    h1 { font-size: 24pt; }
+    .publication-section { display: block; }
+    .section-title { margin-bottom: 14px; }
+    .publications > li { break-inside: avoid; }
+    .page-footer { margin-left: 0; }
     #music-toggle, #goldberg-toggle, #music-status { display: none; }
   }
-</style>
- </head>
 
-
- 
-<body>
-<h2>      何煜坤 (He Yukun) </h2>
-
-  
-   <hr />
-
-  
-  <p> Shanghai Center for Mathematical Sciences and School of Mathematical Sciences, Fudan University <br />
-  Address: 2005 Songhu Road, Shanghai, China  <br />
-  Office: 551 <br />
- Email: heyukun@fudan.edu.cn <br />   </p> 
-  
- 
-
-       <hr />
-
-  <h3>      Research </h3>
-
- <ol reversed>
-
- <li><span class="publication-title">  
-<a href="https://arxiv.org/abs/2610.08127">Bulk universality of random regular graphs</a>, with Jiaoyang Huang and Xiaoyu Wang. </span><br /><span class="publication-details"> 
-Preprint arXiv: 2610.08127.  </span></li>
-
- <li><span class="publication-title">  
-<a href="https://arxiv.org/abs/2609.35024">On eigenvectors of the SYK model</a>. </span><br /><span class="publication-details"> 
-Preprint arXiv: 2609.35024.  </span></li>
-
- <li><span class="publication-title">  
-<a href="https://arxiv.org/abs/2609.05297">The oriented Kesten–McKay law for random regular digraphs</a>, with Jiaoyang Huang. </span><br /><span class="publication-details">   
-Preprint arXiv: 2609.05297.  </span></li>
-
-  <li><span class="publication-title">  
-<a href="https://arxiv.org/abs/2607.18998">Free energy and spectral edge of the SYK model</a>. </span><br /><span class="publication-details"> 
-Preprint arXiv: 2607.18998.  </span></li>
-
-  
- <li><span class="publication-title">  
-<a href="https://arxiv.org/abs/2502.08897">Gaussian Waves and Edge Eigenvectors of Random Regular Graphs</a>, with Jiaoyang Huang and Horng-Tzer Yau. </span><br /><span class="publication-details"> 
-Preprint arXiv: 2502.08897, to appear in Annals of Probability. </span></li>
-
-<li><span class="publication-title">  
-<a href="https://doi.org/10.1007/s00440-026-01472-2">Extremal eigenvectors of sparse random matrices</a>, with Jiaoyang Huang and Chen Wang. </span><br /><span class="publication-details"> 
-    Probability Theory and Related Fields (2026), https://doi.org/10.1007/s00440-026-01472-2, 58 pp.  </span></li>
-
-<li><span class="publication-title">  
-<a href="https://doi.org/10.1007/s00440-025-01423-3">Edge universality of sparse Erdős–Rényi digraphs</a>. </span><br /><span class="publication-details">
-Probability Theory and Related Fields, <b>195</b> (2026), 1505–1557. </span></li>
-
-<li><span class="publication-title">   
-<a href="https://doi.org/10.1007/s00220-024-05063-x">Spectral gap and edge universality of dense random regular graphs</a>. </span><br /><span class="publication-details">
-    Communications in Mathematical Physics, <b>405</b> (2024), Paper No. 181, 40 pp.   </span></li>
-
-<li><span class="publication-title">  
-<a href="https://doi.org/10.1214/23-AAP1945">Quantitative CLT for linear eigenvalue statistics of Wigner matrices</a>, with Zhigang Bao.</span><br /><span class="publication-details">
-    Annals of Applied Probability, <b>33</b> (2023), 5171-5207.  </span></li>
-
-<li><span class="publication-title">   
-<a href="https://doi.org/10.1007/s00440-021-01054-4">Fluctuations of extreme eigenvalues of sparse Erdős–Rényi graphs</a>, with Antti Knowles. </span><br /><span class="publication-details">
-Probability Theory and Related Fields, <b>180</b>  (2021), 985-1056.  </span></li>
-
-<li><span class="publication-title">    
-<a href="https://doi.org/10.1214/22-AAP1788">On Cramér–von Mises statistic for the spectral distribution of random matrices</a>, with Zhigang Bao.</span><br /><span class="publication-details">
-Annals of Applied Probability, <b>32</b>  (2022), 4315-4355.  </span></li>
-
-<li><span class="publication-title">  
-<a href="https://doi.org/10.1214/20-AAP1575">Bulk eigenvalue fluctuations of sparse random matrices</a>.</span><br /><span class="publication-details">
-Annals of Applied Probability, <b>30</b>  (2020), 2846-2879.  </span></li>
-
-<li><span class="publication-title">  
-<a href="https://doi.org/10.1214/19-AOP1339">Local law and complete eigenvector delocalization for supercritical Erdős–Rényi graphs</a>, with Antti Knowles and Matteo Marcozzi.</span><br /><span class="publication-details">
-Annals of Probability, <b>47</b> (2019), 3278-3302.  </span></li>
-
-<li><span class="publication-title">    
-<a href="https://doi.org/10.1007/s00440-019-00946-w">Mesoscopic Eigenvalue Density Correlations of Wigner Matrices</a>, with Antti Knowles. </span><br /><span class="publication-details">
-Probability Theory and Related Fields, <b>177</b> (2020), 147-216.  </span></li>
-
-<li><span class="publication-title">   
-<a href="https://doi.org/10.1007/s10955-019-02385-2">Diffusion Profile for Random Band Matrices: a Short Proof</a>, with Matteo Marcozzi.</span><br /><span class="publication-details">
-Journal of Statistical Physics, <b>177</b> (2019), 666-716.  </span></li>
- 
-<li><span class="publication-title">   
-<a href="https://doi.org/10.1007/s10955-019-02266-8">Mesoscopic linear statistics of Wigner matrices of mixed symmetry class</a>. </span><br /><span class="publication-details">
-Journal of Statistical Physics, <b>175</b> (2019), 932-959. </span></li>
-
- <li><span class="publication-title">  
- <a href="https://doi.org/10.1007/s00440-017-0776-y">Isotropic self-consistent equations for mean-field random matrices</a>, with Antti Knowles and Ron Rosenthal. </span><br /><span class="publication-details">
- Probability Theory and Related Fields, <b>171</b> (2018), 203-249.  </span></li>
-
-<li><span class="publication-title">  
- <a href="https://doi.org/10.1214/16-AAP1237">Mesoscopic eigenvalue statistics of Wigner matrices</a>, with Antti Knowles.</span><br /><span class="publication-details">
- Annals of Applied Probability, <b>27</b> (2017), 1510-1550. </span></li>
-
- </ol>
-
- <h3> Other texts </h3>
-
- <ol reversed>
-
-  <li><span class="publication-title">
-   Lecture notes on <a href="https://he-yukun.github.io/prob_limit2.pdf">Probability Limit Theory</a>.  </span></li>
-  
- <li><span class="publication-title"> 
-  <a href="https://doi.org/10.1016/bs.host.2024.07.005">Random matrix theory: local laws and applications</a>, with Zhigang Bao and Fan Yang. </span><br /><span class="publication-details">
-    Handbook of Statistics, <b>51</b> (2024), Chapter 12, 143–173. </span></li>
-   
- <li><span class="publication-title"> 
-  <a href="https://ems.press/content/serial-article-files/46839?nt=1#page=31">Bulk eigenvalue fluctuations of sparse Erdős–Rényi graphs</a>. </span><br /><span class="publication-details">
-    Oberwolfach reports, <b>16</b> (2019), 3489-3490.</span></li>  </ol>
- 
-
-
-  
-  
-<p> My papers on <a href="https://arxiv.org/a/he_y_5.html/">arXiv</a>.<br />
-
-
-
-
- <br>
-
- <br>
-
-
- <br>
-
-
- <br>
-
-
-   
-
-
-
-
-
-   
-
-
- <!-- Keep music.m4a and goldberg-variations.m4a beside index.html. -->
-
-
-<style>
+  </style>
+  <style>
   .music-toggle {
     position: fixed;
     right: 14px;
@@ -357,8 +217,126 @@ Journal of Statistical Physics, <b>175</b> (2019), 932-959. </span></li>
     .music-toggle:active { transform: none; }
   }
 </style>
+  <script
+    data-goatcounter="https://heyukun.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+  </script>
+</head>
+<body>
+  <header class="page-header">
+    <h1>何煜坤 <span class="roman-name">(He Yukun)</span></h1>
+    <div class="profile-details">
+      <p class="affiliation">Shanghai Center for Mathematical Sciences and School of Mathematical Sciences, Fudan University</p>
+      <p>Address: 2005 Songhu Road, Shanghai, China</p>
+      <p>Office: 551</p>
+      <p>Email: heyukun@fudan.edu.cn</p>
+    </div>
+  </header>
 
-<audio id="background-music" src="music.m4a" loop muted preload="none"></audio>
+  <main>
+    <section class="publication-section" aria-labelledby="research-heading">
+      <h2 class="section-title" id="research-heading">Research</h2>
+      <ol class="publications" reversed>
+
+ <li><span class="publication-title">  
+<a href="https://arxiv.org/abs/2610.08127">Bulk universality of random regular graphs</a>, with Jiaoyang Huang and Xiaoyu Wang. </span><span class="publication-details"> 
+Preprint arXiv: 2610.08127.  </span></li>
+
+ <li><span class="publication-title">  
+<a href="https://arxiv.org/abs/2609.35024">On eigenvectors of the SYK model</a>. </span><span class="publication-details"> 
+Preprint arXiv: 2609.35024.  </span></li>
+
+ <li><span class="publication-title">  
+<a href="https://arxiv.org/abs/2609.05297">The oriented Kesten–McKay law for random regular digraphs</a>, with Jiaoyang Huang. </span><span class="publication-details">   
+Preprint arXiv: 2609.05297.  </span></li>
+
+  <li><span class="publication-title">  
+<a href="https://arxiv.org/abs/2607.18998">Free energy and spectral edge of the SYK model</a>. </span><span class="publication-details"> 
+Preprint arXiv: 2607.18998.  </span></li>
+
+  
+ <li><span class="publication-title">  
+<a href="https://arxiv.org/abs/2502.08897">Gaussian Waves and Edge Eigenvectors of Random Regular Graphs</a>, with Jiaoyang Huang and Horng-Tzer Yau. </span><span class="publication-details"> 
+Preprint arXiv: 2502.08897, to appear in Annals of Probability. </span></li>
+
+<li><span class="publication-title">  
+<a href="https://doi.org/10.1007/s00440-026-01472-2">Extremal eigenvectors of sparse random matrices</a>, with Jiaoyang Huang and Chen Wang. </span><span class="publication-details"> 
+    Probability Theory and Related Fields (2026), https://doi.org/10.1007/s00440-026-01472-2, 58 pp.  </span></li>
+
+<li><span class="publication-title">  
+<a href="https://doi.org/10.1007/s00440-025-01423-3">Edge universality of sparse Erdős–Rényi digraphs</a>. </span><span class="publication-details">
+Probability Theory and Related Fields, <b>195</b> (2026), 1505–1557. </span></li>
+
+<li><span class="publication-title">   
+<a href="https://doi.org/10.1007/s00220-024-05063-x">Spectral gap and edge universality of dense random regular graphs</a>. </span><span class="publication-details">
+    Communications in Mathematical Physics, <b>405</b> (2024), Paper No. 181, 40 pp.   </span></li>
+
+<li><span class="publication-title">  
+<a href="https://doi.org/10.1214/23-AAP1945">Quantitative CLT for linear eigenvalue statistics of Wigner matrices</a>, with Zhigang Bao.</span><span class="publication-details">
+    Annals of Applied Probability, <b>33</b> (2023), 5171-5207.  </span></li>
+
+<li><span class="publication-title">   
+<a href="https://doi.org/10.1007/s00440-021-01054-4">Fluctuations of extreme eigenvalues of sparse Erdős–Rényi graphs</a>, with Antti Knowles. </span><span class="publication-details">
+Probability Theory and Related Fields, <b>180</b>  (2021), 985-1056.  </span></li>
+
+<li><span class="publication-title">    
+<a href="https://doi.org/10.1214/22-AAP1788">On Cramér–von Mises statistic for the spectral distribution of random matrices</a>, with Zhigang Bao.</span><span class="publication-details">
+Annals of Applied Probability, <b>32</b>  (2022), 4315-4355.  </span></li>
+
+<li><span class="publication-title">  
+<a href="https://doi.org/10.1214/20-AAP1575">Bulk eigenvalue fluctuations of sparse random matrices</a>.</span><span class="publication-details">
+Annals of Applied Probability, <b>30</b>  (2020), 2846-2879.  </span></li>
+
+<li><span class="publication-title">  
+<a href="https://doi.org/10.1214/19-AOP1339">Local law and complete eigenvector delocalization for supercritical Erdős–Rényi graphs</a>, with Antti Knowles and Matteo Marcozzi.</span><span class="publication-details">
+Annals of Probability, <b>47</b> (2019), 3278-3302.  </span></li>
+
+<li><span class="publication-title">    
+<a href="https://doi.org/10.1007/s00440-019-00946-w">Mesoscopic Eigenvalue Density Correlations of Wigner Matrices</a>, with Antti Knowles. </span><span class="publication-details">
+Probability Theory and Related Fields, <b>177</b> (2020), 147-216.  </span></li>
+
+<li><span class="publication-title">   
+<a href="https://doi.org/10.1007/s10955-019-02385-2">Diffusion Profile for Random Band Matrices: a Short Proof</a>, with Matteo Marcozzi.</span><span class="publication-details">
+Journal of Statistical Physics, <b>177</b> (2019), 666-716.  </span></li>
+ 
+<li><span class="publication-title">   
+<a href="https://doi.org/10.1007/s10955-019-02266-8">Mesoscopic linear statistics of Wigner matrices of mixed symmetry class</a>. </span><span class="publication-details">
+Journal of Statistical Physics, <b>175</b> (2019), 932-959. </span></li>
+
+ <li><span class="publication-title">  
+ <a href="https://doi.org/10.1007/s00440-017-0776-y">Isotropic self-consistent equations for mean-field random matrices</a>, with Antti Knowles and Ron Rosenthal. </span><span class="publication-details">
+ Probability Theory and Related Fields, <b>171</b> (2018), 203-249.  </span></li>
+
+<li><span class="publication-title">  
+ <a href="https://doi.org/10.1214/16-AAP1237">Mesoscopic eigenvalue statistics of Wigner matrices</a>, with Antti Knowles.</span><span class="publication-details">
+ Annals of Applied Probability, <b>27</b> (2017), 1510-1550. </span></li>
+
+ </ol>
+    </section>
+    <section class="publication-section" aria-labelledby="other-heading">
+      <h2 class="section-title" id="other-heading">Other texts</h2>
+      <ol class="publications" reversed>
+
+  <li><span class="publication-title">
+   Lecture notes on <a href="https://he-yukun.github.io/prob_limit2.pdf">Probability Limit Theory</a>.  </span></li>
+  
+ <li><span class="publication-title"> 
+  <a href="https://doi.org/10.1016/bs.host.2024.07.005">Random matrix theory: local laws and applications</a>, with Zhigang Bao and Fan Yang. </span><span class="publication-details">
+    Handbook of Statistics, <b>51</b> (2024), Chapter 12, 143–173. </span></li>
+   
+ <li><span class="publication-title"> 
+  <a href="https://ems.press/content/serial-article-files/46839?nt=1#page=31">Bulk eigenvalue fluctuations of sparse Erdős–Rényi graphs</a>. </span><span class="publication-details">
+    Oberwolfach reports, <b>16</b> (2019), 3489-3490.</span></li>  </ol>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>My papers on <a href="https://arxiv.org/a/he_y_5.html/">arXiv</a>.</p>
+  </footer>
+
+  <!-- Keep music.m4a and goldberg-variations.m4a beside index.html. -->
+  <audio id="background-music" src="music.m4a" loop muted preload="none"></audio>
 <audio id="goldberg-music" src="goldberg-variations.m4a" loop muted preload="none"></audio>
 
 <button id="music-toggle" class="music-toggle" type="button"
@@ -474,10 +452,5 @@ Journal of Statistical Physics, <b>175</b> (2019), 932-959. </span></li>
   });
 })();
 </script>
-
 </body>
-
-
-
- 
 </html>
